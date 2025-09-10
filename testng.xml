@@ -3,10 +3,12 @@
 <suite name = "All Tests" parallel="tests" thread-count="2">
 
     <test name = "Login Test">
+        <parameter name="browserName" value="firefox"/>
         <classes>
             <class name = "Tests.LoginTest" />
         </classes>
     </test>
+    <parameter name="browserName" value="chrome"/>
     <test name = "Get First Product Test">
         <classes>
             <class name = "Tests.ProductTest" />

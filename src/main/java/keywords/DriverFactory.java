@@ -1,6 +1,7 @@
 package keywords;
 
 import base.AppConstants;
+import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,30 +13,46 @@ public class DriverFactory {
 
     }
 
-    public static synchronized WebDriver getDriver(){
-        if (driverThreadLocal.get() == null){
-            String browser = AppConstants.browserName;
-            WebDriver driver = null;
-            if(browser.equalsIgnoreCase("chrome")){
-                if(AppConstants.platformName.equalsIgnoreCase("local")) {
-                    driver = new ChromeDriver();
-                }
-            }
-            else if(browser.equalsIgnoreCase("firefox")){
-                if(AppConstants.platformName.equalsIgnoreCase("local")) {
-                    driver = new FirefoxDriver();
-                }
-            }
 
-            else {
-                System.out.println("Browser name entered is not supported!!");
+    public static synchronized void initDriver(String browserName){
+        if (driverThreadLocal.get() == null) {
+            WebDriver driver;
+
+            if (browserName == null) {
+                driver = new ChromeDriver();
+            } else {
+
+                if (browserName.equalsIgnoreCase("chrome")) {
+                    driver = new ChromeDriver();
+                } else if (browserName.equalsIgnoreCase("firefox")) {
+                    driver = new FirefoxDriver();
+                } else {
+                    System.out.println("There is no such defined browser system will move on with default browser");
+
+                    if (AppConstants.browserName.equalsIgnoreCase("chrome")) {
+                        driver = new ChromeDriver();
+                    } else if (AppConstants.browserName.equalsIgnoreCase("firefox")) {
+                        driver = new FirefoxDriver();
+                    } else {
+                        System.out.println("there is not default driver defined in system tests will execute on chrome driver");
+                        driver = new ChromeDriver();
+                    }
+                }
+
             }
             driver.manage().window().maximize();
-
             driverThreadLocal.set(driver);
         }
 
-        return driverThreadLocal.get();
+    }
+
+    public static synchronized WebDriver getDriver(){
+        if (driverThreadLocal.get()==null){
+            throw new IllegalStateException("Driver not yet initialied please initialize browser first");
+        }
+        else {
+            return driverThreadLocal.get();
+        }
     }
 
     public static void quitDriver(){
