@@ -1,7 +1,6 @@
 package keywords;
 
 import base.AppConstants;
-import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;

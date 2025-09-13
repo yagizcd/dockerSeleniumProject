@@ -1,25 +1,28 @@
+// src/test/java/Tests/BaseTest.java
+
 package Tests;
 
+import org.testng.annotations.*;
 import keywords.DriverFactory;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import utils.ExtentManager;
 
-public class BaseTest {
+public abstract class BaseTest {
 
-    protected WebDriver driver;
-    protected String browser;
 
-    @Parameters({"browserName"})
-    @BeforeTest
+    @Parameters("browserName")
+    @BeforeMethod
     public void setUp(@Optional String browserName) {
         DriverFactory.initDriver(browserName);
     }
 
-    @AfterTest
-    public void tearDown(){
+    @AfterMethod
+    public void tearDown() {
         DriverFactory.quitDriver();
+    }
+
+
+    @AfterSuite(alwaysRun = true)
+    public void afterSuite() {
+        ExtentManager.flush();
     }
 }

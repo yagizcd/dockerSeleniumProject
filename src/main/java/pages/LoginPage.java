@@ -3,7 +3,6 @@ package pages;
 import keywords.DriverFactory;
 import keywords.SeleniumWrapper;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class LoginPage {
 

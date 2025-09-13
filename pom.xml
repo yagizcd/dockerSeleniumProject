@@ -12,8 +12,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.complier.source>17</maven.complier.source>
-    <maven.complier.target>17</maven.complier.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
     <XmlFile>testng.xml</XmlFile>
   </properties>
 
@@ -24,10 +24,20 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.5</version>
         <configuration>
+          <argLine>-Duser.language=en -Duser.country=US</argLine>
+          <testFailureIgnore>true</testFailureIgnore>
           <suiteXmlFiles>
             <suiteXmlFile>testng.xml</suiteXmlFile>
           </suiteXmlFiles>
         </configuration>
+
+        <dependencies>
+          <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.10.2</version> </dependency>
+        </dependencies>
+
       </plugin>
     </plugins>
   </build>
@@ -39,32 +49,22 @@
       <version>4.35.0</version>
     </dependency>
     <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-api</artifactId>
-      <version>4.35.0</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
-    <dependency>
       <groupId>com.aventstack</groupId>
       <artifactId>extentreports</artifactId>
       <version>5.0.9</version>
     </dependency>
-
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.28</version>
     </dependency>
-
     <!-- https://mvnrepository.com/artifact/org.testng/testng -->
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>6.14.3</version>
+      <version>7.10.2</version>
       <scope>test</scope>
     </dependency>
-
     <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>

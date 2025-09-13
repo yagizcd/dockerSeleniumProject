@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name = "All Tests" parallel="tests" thread-count="2">
+<suite name="All Tests" parallel="methods" thread-count="2" verbose="2">
 
-    <test name = "Login Test">
-        <parameter name="browserName" value="firefox"/>
+    <listeners>
+        <listener class-name="listeners.TestListener" />
+    </listeners>
+
+    <test name="All Functional Tests">
+        <parameter name="browserName" value="chrome"/>
         <classes>
-            <class name = "Tests.LoginTest" />
-        </classes>
-    </test>
-    <parameter name="browserName" value="chrome"/>
-    <test name = "Get First Product Test">
-        <classes>
-            <class name = "Tests.ProductTest" />
+            <class name="Tests.LoginTest" />
+            <class name="Tests.ProductTest" />
         </classes>
     </test>
 
 </suite>
-
-
-
