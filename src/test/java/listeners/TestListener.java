@@ -17,11 +17,22 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         ExtentManager.startTest(result.getMethod().getMethodName());
+
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
         ExtentManager.getTest().log(Status.PASS, "Test Başarılı!");
+
+        try{
+            WebDriver driver = DriverFactory.getDriver();
+
+            String base64Screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+            ExtentManager.getTest().pass("Succes Screenshot", MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
+        }catch (Exception e){
+            e.printStackTrace();
+            ExtentManager.getTest().pass("There is and error taking screenshot" + e.getMessage());
+        }
     }
 
     @Override
