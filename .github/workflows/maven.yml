@@ -38,7 +38,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: > 
-        mvn clean test -DbrowserName=chrome -Dplatform=remote_git
+        mvn clean test -Dplatform=remote_git
         -Dmaven.test.failure.ignore=true
     - name: archive report artifact
       uses: actions/upload-artifact@v4
