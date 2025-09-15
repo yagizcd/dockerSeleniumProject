@@ -54,6 +54,7 @@ public class DriverFactory {
                         co.addArguments("--disable-gpu");
                         co.addArguments("--no-sandbox");
                         co.addArguments("--remote-allow-origins=*");
+                        driver = new ChromeDriver(co);
 
 
                     }
@@ -78,6 +79,13 @@ public class DriverFactory {
                         }catch (MalformedURLException  e){
                             throw new RuntimeException(e);
                         }
+                    }
+                    else if(AppConstants.platformName.equalsIgnoreCase("remote_git")) {
+                        co = new ChromeOptions();
+                        co.addArguments("--headless"); //for git-hub actions
+                        co.addArguments("--disable-gpu");
+                        co.addArguments("--no-sandbox");
+                        co.addArguments("--remote-allow-origins=*");
                     }
                     else{
                         logger.error("Platform not supported!");
