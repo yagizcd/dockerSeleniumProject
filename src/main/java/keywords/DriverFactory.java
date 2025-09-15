@@ -48,6 +48,15 @@ public class DriverFactory {
                             throw new RuntimeException(e);
                         }
                     }
+                    else if(AppConstants.platformName.equalsIgnoreCase("remote_git")){
+                        co = new ChromeOptions();
+                        co.addArguments("--headless"); //for git-hub actions
+                        co.addArguments("--disable-gpu");
+                        co.addArguments("--no-sandbox");
+                        co.addArguments("--remote-allow-origins=*");
+
+
+                    }
 
                     else{
                         logger.error("Platform not supported!");
