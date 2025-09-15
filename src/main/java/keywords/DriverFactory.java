@@ -82,10 +82,7 @@ public class DriverFactory {
                     }
                     else if(AppConstants.platformName.equalsIgnoreCase("remote_git")) {
                         fo = new FirefoxOptions();
-                        fo.addArguments("--headless"); //for git-hub actions
-                        fo.addArguments("--disable-gpu");
-                        fo.addArguments("--no-sandbox");
-                        fo.addArguments("--remote-allow-origins=*");
+                        fo.addArguments("-headless"); //for git-hub actions
                         driver = new FirefoxDriver(fo);
 
                     }
