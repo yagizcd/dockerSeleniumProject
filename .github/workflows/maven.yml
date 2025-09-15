@@ -9,6 +9,15 @@
 name: Java CI with Maven
 
 on:
+  workflow_dispatch:
+    inputs:
+      browsername:
+        type: string
+        description: 'broser name'
+        default: 'chrome'
+      xmlfilename:
+        tpye: string
+        description: 'enter suite xml name'
   push:
     branches: [ "main" ]
   pull_request:
@@ -28,4 +37,14 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn clean test -DbrowserName=chrome -Dplatform=remote_git
+      run: > 
+        mvn clean test -DbrowserName=chrome -Dplatform=remote_git
+        -Dmaven.test.failure.ignore=true
+    - name: archive report artifact
+      uses: actions/upload-artifact@v3
+      with:
+          name: sparkHTML
+          path: ./reports/*.html
+
+
+

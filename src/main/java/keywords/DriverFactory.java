@@ -81,11 +81,13 @@ public class DriverFactory {
                         }
                     }
                     else if(AppConstants.platformName.equalsIgnoreCase("remote_git")) {
-                        co = new ChromeOptions();
-                        co.addArguments("--headless"); //for git-hub actions
-                        co.addArguments("--disable-gpu");
-                        co.addArguments("--no-sandbox");
-                        co.addArguments("--remote-allow-origins=*");
+                        fo = new FirefoxOptions();
+                        fo.addArguments("--headless"); //for git-hub actions
+                        fo.addArguments("--disable-gpu");
+                        fo.addArguments("--no-sandbox");
+                        fo.addArguments("--remote-allow-origins=*");
+                        driver = new FirefoxDriver(fo);
+
                     }
                     else{
                         logger.error("Platform not supported!");
