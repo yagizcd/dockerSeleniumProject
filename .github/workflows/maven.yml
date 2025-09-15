@@ -41,7 +41,7 @@ jobs:
         mvn clean test -DbrowserName=chrome -Dplatform=remote_git
         -Dmaven.test.failure.ignore=true
     - name: archive report artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
           name: sparkHTML
           path: ./reports/*.html
